@@ -18,29 +18,22 @@ class LayoutApp extends StatelessWidget {
         children: <Widget>[
           new Expanded(
               child: new Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  new Text("Oeschinen Lake Campground",
-                    style: new TextStyle(
-                      fontWeight: FontWeight.bold
-                    ),
-                  ),
-                  new Container(
-                    margin: const EdgeInsets.only(top: 8.0),
-                    child: new Text("Kandersteg, Switzerland",
-                      style: new TextStyle(
-                        color: Colors.grey[500]
-                      ),
-                    ),
-                  )
-                ],
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              new Text(
+                "Oeschinen Lake Campground",
+                style: new TextStyle(fontWeight: FontWeight.bold),
+              ),
+              new Container(
+                margin: const EdgeInsets.only(top: 8.0),
+                child: new Text(
+                  "Kandersteg, Switzerland",
+                  style: new TextStyle(color: Colors.grey[500]),
+                ),
               )
-          ),
-          new Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          new Text("41")
+            ],
+          )),
+          new FavoriteWidget()
         ],
       ),
     );
@@ -52,13 +45,14 @@ class LayoutApp extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          new Icon(icon, color: color,),
-          new Text(label,
+          new Icon(
+            icon,
+            color: color,
+          ),
+          new Text(
+            label,
             style: new TextStyle(
-                fontSize: 12.0,
-                fontWeight: FontWeight.w400,
-                color: color
-            ),
+                fontSize: 12.0, fontWeight: FontWeight.w400, color: color),
           )
         ],
       );
@@ -105,5 +99,46 @@ class LayoutApp extends StatelessWidget {
       ),
     );
   }
+}
 
+class FavoriteWidget extends StatefulWidget {
+  @override
+  _FavoriteWidgetState createState() {
+    return new _FavoriteWidgetState();
+  }
+}
+
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorited = false;
+  int _favoriteCount = 25;
+
+  void _toggleFavorite() {
+    setState(() {
+      _isFavorited = !_isFavorited;
+      if (_isFavorited) {
+        _favoriteCount += 1;
+      } else {
+        _favoriteCount -= 1;
+      }
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return new Row(
+      children: <Widget>[
+        new Container(
+          padding: const EdgeInsets.all(0.0),
+          child: new IconButton(
+            icon: _isFavorited
+                ? new Icon(Icons.star)
+                : new Icon(Icons.star_border),
+            color: Colors.red[500],
+            onPressed: _toggleFavorite,
+          ),
+        ),
+        new SizedBox(width: 18.0, child: new Text("$_favoriteCount"))
+      ],
+    );
+  }
 }
