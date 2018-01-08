@@ -36,5 +36,19 @@
 	<string>1:485081389312:ios:8e7f0bdda0911415</string>
 	<key>DATABASE_URL</key>
 	<string>https://flutter-firebase-9c0d7.firebaseio.com</string>
+	<key>CFBundleURLTypes</key>
+      <array>
+          <dict>
+             <key>CFBundleTypeRole</key>
+             <string>Editor</string>
+             <key>CFBundleURLSchemes</key>
+             <array>
+             <!-- reverse url of your client id, for example: -->
+                <string>com.googleusercontent.apps.485081389312-bqs0rfp2u6g5t36pntebjvkondoorgic</string>
+             <!-- bundle id, for example: -->
+                <string>com.yourcompany.storyTime</string>
+             </array>
+          </dict>
+      </array>
 </dict>
 </plist>
